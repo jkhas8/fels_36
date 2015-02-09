@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150206081122) do
+ActiveRecord::Schema.define(version: 20150209011802) do
 
   create_table "answers", force: true do |t|
     t.text     "answer_1"
@@ -43,6 +43,17 @@ ActiveRecord::Schema.define(version: 20150206081122) do
   add_index "lessions", ["category_id"], name: "index_lessions_on_category_id", using: :btree
   add_index "lessions", ["user_id"], name: "index_lessions_on_user_id", using: :btree
 
+  create_table "relationships", force: true do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
+  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
+  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
+
   create_table "results", force: true do |t|
     t.integer  "lession_id"
     t.integer  "word_id"
@@ -58,10 +69,11 @@ ActiveRecord::Schema.define(version: 20150206081122) do
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "password_digest"
     t.string   "remember_digest"
+    t.boolean  "admin",           default: false
   end
 
   create_table "words", force: true do |t|
