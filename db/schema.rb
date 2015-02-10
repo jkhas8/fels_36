@@ -27,9 +27,9 @@ ActiveRecord::Schema.define(version: 20150209011802) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
-    t.string   "desciption"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "lessions", force: true do |t|
