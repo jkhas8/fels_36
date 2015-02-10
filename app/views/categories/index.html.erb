@@ -8,3 +8,7 @@
 </ul>
 
 <%= will_paginate %>
+
+<hr/>
+
+<%= render 'category_form' if logged_in? && current_user.admin? %>
