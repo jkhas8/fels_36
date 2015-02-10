@@ -1,12 +1,22 @@
 class User < ActiveRecord::Base
   attr_accessor :remember_token
   has_many :lessions, dependent: :destroy
+  has_many :active_relationships, class_name: 'Relationship',
+                                  foreign_key: 'follower_id',
+                                  dependent: :destroy
+  has_many :passive_relationships, class_name: 'Relationship',
+                                    foreign_key: 'followed_id',
+                                    dependent: :destroy
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
+
+  has_secure_password
+
   validates :name, presence: true, length: {maximum:50}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 255},
                     format: {with: VALID_EMAIL_REGEX},
                     uniqueness: {case_sensitive: false}
-  has_secure_password
   validates :password, length: {minimum: 6}, allow_blank: true
 
   class << self
@@ -33,5 +43,17 @@ class User < ActiveRecord::Base
 
   def forget
     update_attribute :remember_digest, nil
+  end
+
+  def follow other
+    active_relationships.create followed_id: other.id
+  end
+
+  def unfollow other
+    active_relationships.find_by(followed_id: other.id).destroy
+  end
+
+  def following? other
+    following.include? other
   end
 end
