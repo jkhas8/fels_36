@@ -1,0 +1,22 @@
+<% provide(:title, 'All words') %>
+<h1>All words</h1>
+<div class="filter form-actions">
+  <%= form_for :filter, url:{actiin: 'index'}, method: :get do |f| %>
+    Category:
+    <%= f.select 'category', Category.all.collect{|c| [c.name, c.id]} %>
+    Learned:
+    <%= f.radio_button 'learned', '1' %>
+    Not learned:
+    <%= f.radio_button 'learned', '0' %>
+    All:
+    <%= f.radio_button 'learned', '-1' %>
+    <%= f.submit 'Filter', :class=>'filter_submit' %>
+  <% end %>
+</div>
+<%= will_paginate %>
+<ul class="words">
+  <% @words.each do |word| %>
+    <%= render word %>
+  <% end %>
+</ul>
+<%= will_paginate %>

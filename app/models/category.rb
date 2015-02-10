@@ -9,4 +9,10 @@ class Category < ActiveRecord::Base
     user.lessions.select{|l| l.category == self}.
       map(&:results).flatten.map(&:word)
   end
+
+  def words_not_learned_by user
+    Word.all.select{|l| l.category == self}.select do |w|
+      !user.lessions.map(&:results).flatten.map(&:word).include? w
+    end
+  end
 end
