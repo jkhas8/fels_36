@@ -1,7 +1,8 @@
 class WordsController < ApplicationController
+  before_action :logged_in_user
 
   def index
-    category_id = params[:filter][:category]
+    category_id = params[:filter] ? params[:filter][:category_id] : nil
     if category_id.nil?
       @words = Word.paginate page: params[:page]
     else
@@ -22,8 +23,5 @@ class WordsController < ApplicationController
         end
       end
     end
-  end
-
-  def new
   end
 end

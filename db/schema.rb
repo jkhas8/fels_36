@@ -14,11 +14,9 @@
 ActiveRecord::Schema.define(version: 20150209011802) do
 
   create_table "answers", force: true do |t|
-    t.text     "answer_1"
-    t.text     "answer_2"
-    t.text     "answer_3"
-    t.text     "answer_4"
+    t.string   "content"
     t.integer  "word_id"
+    t.boolean  "correct"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
