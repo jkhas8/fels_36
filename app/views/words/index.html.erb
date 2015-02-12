@@ -1,9 +1,9 @@
 <% provide(:title, 'All words') %>
 <h1>All words</h1>
 <div class="filter form-actions">
-  <%= form_for :filter, url:{actiin: 'index'}, method: :get do |f| %>
+  <%= form_for :word, method: :get do |f| %>
     Category:
-    <%= f.select 'category_id', Category.all.collect{|c| [c.name, c.id]} %>
+    <%= f.select :category_id, Category.all.collect{|c| [c.name, c.id]} %>
     Learned:
     <%= f.radio_button 'learned', '1' %>
     Not learned:

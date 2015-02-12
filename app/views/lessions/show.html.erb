@@ -1,0 +1,6 @@
+<% provide(:title, "Lession|#{@lession.category.name}") %>
+<div class="row">
+  <% @results.each do |result| %>
+    <%= result.word.content %></br>
+  <% end %>
+</div>

@@ -2,7 +2,7 @@ class WordsController < ApplicationController
   before_action :logged_in_user
 
   def index
-    category_id = params[:filter] ? params[:filter][:category_id] : nil
+    category_id = params[:word] ? params[:word][:category_id] : nil
     if category_id.nil?
       @words = Word.paginate page: params[:page]
     else
@@ -10,7 +10,7 @@ class WordsController < ApplicationController
       if @category.nil?
         raise ActionController::RoutingError.new 'Not Found'
       else
-        @learned = params[:filter][:learned]
+        @learned = params[:word][:learned]
         case @learned
         when "1"
           @words = @category.words_learned_by(current_user).

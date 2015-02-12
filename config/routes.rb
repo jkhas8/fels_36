@@ -23,4 +23,7 @@ Rails.application.routes.draw do
       resources :words, only: [:new, :create, :destroy, :edit, :update]
     end
   end
- end
+  resources :categories do
+    resources :lessions
+  end
+end
