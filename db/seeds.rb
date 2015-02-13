@@ -42,9 +42,11 @@ end
 categories = Category.all
 categories.each do |category|
   100.times do |n|
-    content = "word #{n}"
-    meaning = "meaning #{n}"
-    category.words.create!(content: content, meaning: meaning)
+    content = Faker::Lorem.word
+    meaning = Faker::Lorem.word
+    word = category.words.build(content: content, meaning: meaning)
+    word.answers.build(content: meaning, correct: true)
+    word.save!
   end
 end
 

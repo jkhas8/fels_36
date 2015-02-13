@@ -1,0 +1,13 @@
+<%= render 'shared/error_messages', object: f.object %>
+
+<%= f.label :content %>
+<%= f.text_field :content, class: "form_control" %>
+
+<%= f.label :meaning %>
+<%= f.text_field :meaning, class: "form_control" %>
+
+<%= f.fields_for :answers do |builder| %>
+  <%= render 'answer_fields', f: builder %>
+<% end %>
+<p><%= link_to_add_fields "Add Answer", f, :answers %></p>
+

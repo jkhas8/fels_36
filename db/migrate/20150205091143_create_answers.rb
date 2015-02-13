@@ -1,11 +1,9 @@
 class CreateAnswers < ActiveRecord::Migration
   def change
     create_table :answers do |t|
-      t.text :answer_1
-      t.text :answer_2
-      t.text :answer_3
-      t.text :answer_4
+      t.string :content
       t.references :word, index: true
+      t.boolean :correct
 
       t.timestamps null: false
     end
