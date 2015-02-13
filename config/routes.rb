@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   resources :words, only: [:index]
   namespace :admin do
     resources :categories, only: [:edit, :update, :destroy, :new, :create] do
-      resources :words, only: [:new, :create]
+      resources :words, only: [:new, :create, :destroy, :edit, :update]
     end
   end
  end

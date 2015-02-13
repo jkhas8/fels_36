@@ -5,4 +5,10 @@
 <div class="meaning">
   <%= word.meaning %>
 </div>
+<br />
+<% if current_user.admin? %>
+  <%= link_to "edit", edit_admin_category_word_path(word.category, word) %>
+  <%= link_to "delete", admin_category_word_path(word.category, word),
+                        method: :delete, data: {confirm: "You sure?"} %>
+<% end %>
 </li>
