@@ -5,9 +5,11 @@ class Category < ActiveRecord::Base
   validates :name, presence: true
   validates :description, presence: true
 
+  accepts_nested_attributes_for :lessions
+
   def words_learned_by user
     user.lessions.select{|l| l.category == self}.
-      map(&:results).flatten.map(&:word)
+      map(&:results).flatten.map(&:word).uniq
   end
 
   def words_not_learned_by user
