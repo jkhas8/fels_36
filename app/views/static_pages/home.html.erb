@@ -8,6 +8,15 @@
         <%= render 'shared/stats' %>
       </section>
     </aside>
+    <div class="col-md-8">
+      <h3>Activities Feed</h3>
+      <% if @activities.any? %>
+        <ol class="activities">
+          <%= render @activities %>
+        </ol>
+        <%= will_paginate @activities %>
+      <% end %>
+    </div>
   </div>
 <% else %>
   <div class="center jumbotron">
