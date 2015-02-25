@@ -1,6 +1,17 @@
 <% provide(:title, "Lession|#{@lession.category.name}") %>
 <div class="row">
-  <% @results.each do |result| %>
-    <%= result.word.content %></br>
+  <% @results.each_with_index do |result, i| %>
+    <%= content_tag :div, class: i == 0 ? "question current" : "question",
+      id: result.word.id do %>
+    <b><%= result.word.content %></b><br />
+    <% result.word.answers.each do |answer| %>
+      <%= answer.content %><br />
+    <% end %>
+    <% if i == 19 %>
+      <%= button_tag "Submit", type: "button" %>
+    <% else %>
+      <%= button_tag "Next", type: "button", onclick: "show_questions()" %>
+    <% end %>
   <% end %>
+<% end %>
 </div>
