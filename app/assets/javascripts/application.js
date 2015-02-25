@@ -26,3 +26,9 @@ function add_fields(link, association, content) {
   var regexp = new RegExp("new_" + association, "g")
   $(link).parent().before(content.replace(regexp, new_id));
 }
+
+function show_questions() {
+  var current_question = $('div.current');
+  current_question.removeClass("current");
+  current_question.next().addClass("current");
+}
