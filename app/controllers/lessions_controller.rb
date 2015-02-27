@@ -19,16 +19,19 @@ class LessionsController < ApplicationController
 
   def update
     @lession = Lession.find params[:id]
-    if @lession.update_attributes params_lession
-      flash[:success] = "Your test is saved!"
-      redirect_back_or root_path
+    unless @lession.learned
+      @lession.learned = true
+      if @lession.update_attributes params_lession
+        render 'show'
+      end
     else
+      flash[:warning] = "You had learned this lession!"
+      render 'show'
     end
   end
 
   def show
     @lession = Lession.find params[:id]
-    @results = @lession.results
   end
 
   private

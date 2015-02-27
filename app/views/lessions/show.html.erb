@@ -1,18 +1,28 @@
 <% provide(:title, "Lession|#{@lession.category.name}") %>
 <div class="row">
+  <% if @lession.learned %>
+    <%= content_tag :p,"You have " +
+      pluralize(@lession.check_correct_answer(@lession), "correct answer"),
+      class: "correct" %>
+  <% end %>
   <%= form_for @lession, :url => {action: "update"} do |f| %>
-    <% @results.each_with_index do |result, i| %>
+    <% @lession.results.each_with_index do |result, i| %>
       <%= content_tag :div, class: i == 0 ? "question current" : "question",
         id: result.word.id do %>
+        <%= content_tag :p, "Question #{i+1}/#{@lession.results.count}" %>
         <b><%= result.word.content %></b><br />
         <%= f.fields_for :results, result do |builder| %>
-          <% result.word.answers.each do |answer| %>
-            <%= builder.radio_button :answer_id, answer.id %>
-            <%= answer.content %><br />
+          <% result.word.answers.shuffle.each do |answer| %>
+            <%= builder.radio_button :answer_id, answer.id,
+              disabled: @lession.learned %>
+            <%= label :answer_id, answer.content,
+              class: answer.correct && @lession.learned ?
+              "correct" : "" %>
+            <br />
           <% end %>
         <% end %>
         <% if i == 19 %>
-          <%= button_tag "Submit", type: "submit" %>
+          <%= button_tag "Submit", type: "submit", disabled: @lession.learned %>
         <% else %>
           <%= button_tag "Next", type: "button", onclick: "show_questions()" %>
         <% end %>
