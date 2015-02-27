@@ -46,6 +46,9 @@ categories.each do |category|
     meaning = Faker::Lorem.word
     word = category.words.build(content: content, meaning: meaning)
     word.answers.build(content: meaning, correct: true)
+    3.times do |a|
+      word.answers.build(content: Faker::Lorem.word, correct: false)
+    end
     word.save!
   end
 end
