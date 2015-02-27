@@ -17,6 +17,15 @@ class LessionsController < ApplicationController
     end
   end
 
+  def update
+    @lession = Lession.find params[:id]
+    if @lession.update_attributes params_lession
+      flash[:success] = "Your test is saved!"
+      redirect_back_or root_path
+    else
+    end
+  end
+
   def show
     @lession = Lession.find params[:id]
     @results = @lession.results
@@ -24,6 +33,6 @@ class LessionsController < ApplicationController
 
   private
   def params_lession
-    params.require.(:lession).permit
+    params.require(:lession).permit(results_attributes: [:id, :answer_id])
   end
 end

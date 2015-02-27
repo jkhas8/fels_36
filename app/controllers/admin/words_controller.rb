@@ -42,7 +42,7 @@ module Admin
     private
     def word_params
       params.require(:word).permit(:content, :meaning,
-        :answers_attributes => [:id, :content, :_destroy, :correct])
+        answers_attributes: [:id, :content, :_destroy, :correct])
     end
 
     def get_category

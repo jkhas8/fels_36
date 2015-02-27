@@ -301,6 +301,9 @@ input {
 
 .question {
   display: none;
+  input {
+    width: 30px;
+  }
 }
 
 .current {

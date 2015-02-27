@@ -1,17 +1,22 @@
 <% provide(:title, "Lession|#{@lession.category.name}") %>
 <div class="row">
-  <% @results.each_with_index do |result, i| %>
-    <%= content_tag :div, class: i == 0 ? "question current" : "question",
-      id: result.word.id do %>
-    <b><%= result.word.content %></b><br />
-    <% result.word.answers.each do |answer| %>
-      <%= answer.content %><br />
-    <% end %>
-    <% if i == 19 %>
-      <%= button_tag "Submit", type: "button" %>
-    <% else %>
-      <%= button_tag "Next", type: "button", onclick: "show_questions()" %>
+  <%= form_for @lession, :url => {action: "update"} do |f| %>
+    <% @results.each_with_index do |result, i| %>
+      <%= content_tag :div, class: i == 0 ? "question current" : "question",
+        id: result.word.id do %>
+        <b><%= result.word.content %></b><br />
+        <%= f.fields_for :results, result do |builder| %>
+          <% result.word.answers.each do |answer| %>
+            <%= builder.radio_button :answer_id, answer.id %>
+            <%= answer.content %><br />
+          <% end %>
+        <% end %>
+        <% if i == 19 %>
+          <%= button_tag "Submit", type: "submit" %>
+        <% else %>
+          <%= button_tag "Next", type: "button", onclick: "show_questions()" %>
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
 </div>
