@@ -1,0 +1,8 @@
+<li>
+<%= link_to "Lession #{lession.id}", category_lession_path(@category, lession) %>
+<% if lession.learned %>
+  <%= "Correct: #{lession.check_correct_answer(lession)}/#{lession.results.size}" %>
+<% else %>
+  <%= "Not learned." %>
+<% end %>
+</li>

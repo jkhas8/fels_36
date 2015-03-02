@@ -1,4 +1,9 @@
 class LessionsController < ApplicationController
+  def index
+    @category = Category.find params[:category_id]
+    @lessions = @category.lessions.paginate page: params[:page]
+  end
+
   def new
   end
 

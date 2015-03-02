@@ -9,7 +9,8 @@ class Lession < ActiveRecord::Base
   after_update :create_finish_lession_activity
 
   def check_correct_answer lession
-    lession.results.select{|r| r.answer.correct?}.count
+    lession.results.select{|result|
+      result.answer.correct? unless result.answer.nil?}.count
   end
 
   private
