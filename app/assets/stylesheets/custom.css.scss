@@ -309,3 +309,16 @@ input {
 .current {
   display: block !important;
 }
+
+label{
+  font-weight: normal;
+}
+
+.incorrect {
+  color: #D8000C;
+}
+
+.correct {
+  color: #4F8A10;
+  background-color: #DFF2BF;
+}

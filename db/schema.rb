@@ -33,8 +33,9 @@ ActiveRecord::Schema.define(version: 20150209011802) do
   create_table "lessions", force: true do |t|
     t.integer  "category_id"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "learned",     default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "lessions", ["category_id", "user_id"], name: "index_lessions_on_category_id_and_user_id", using: :btree
