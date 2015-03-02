@@ -30,6 +30,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by id: params[:id]
+    @activities = @user.activities.recent_first.paginate page: params[:page]
   end
 
   def edit

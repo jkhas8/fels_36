@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
                                     dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :activities
 
   has_secure_password
 
@@ -43,6 +44,12 @@ class User < ActiveRecord::Base
 
   def forget
     update_attributes remember_digest: nil
+  end
+
+  def feed
+    Activity.where("user_id IN (:following_ids) OR
+                   (user_id = :user_id AND target_type NOT IN ('Follower', 'Followed'))",
+                    user_id: id, following_ids: following_ids)
   end
 
   def follow other
