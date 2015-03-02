@@ -56,4 +56,14 @@ class User < ActiveRecord::Base
   def following? other
     following.include? other
   end
+
+  def learned_words
+    lessions.map(&:results).flatten.map(&:word).uniq
+  end
+
+  def not_learned_words
+    Word.all.select do |word|
+      !learned_words.include? word
+    end
+  end
 end

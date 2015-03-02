@@ -3,25 +3,21 @@ class WordsController < ApplicationController
 
   def index
     category_id = params[:word] ? params[:word][:category_id] : nil
-    if category_id.nil?
-      @words = Word.paginate page: params[:page]
-    else
-      @category = Category.find_by id: category_id
-      if @category.nil?
-        raise ActionController::RoutingError.new 'Not Found'
+    learned = params[:word] ? params[:word][:learned].to_i : nil
+    @words = if category_id.blank?
+      if learned == 1 || learned == 0
+       current_user.send "#{'not_' if learned == 0}learned_words"
       else
-        @learned = params[:word][:learned]
-        case @learned
-        when "1"
-          @words = @category.words_learned_by(current_user).
-            paginate page: params[:page]
-        when "0"
-          @words = @category.words_not_learned_by(current_user).
-            paginate page: params[:page]
-        else
-          @words = @category.words.paginate page: params[:page]
-        end
+        Word.all
+      end
+    else
+      @category = Category.find category_id
+      if learned == 1 || learned == 0
+        @category.send "words#{'_not' if learned == 0}_learned_by", current_user
+      else
+        @category.words
       end
     end
+    @words = @words.paginate page: params[:page]
   end
 end
