@@ -31,6 +31,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by id: params[:id]
     @activities = @user.activities.recent_first.paginate page: params[:page]
+    respond_to do |format|
+      format.html
+      format.js {render partial: 'shared/activities_ajax'}
+    end
   end
 
   def edit
