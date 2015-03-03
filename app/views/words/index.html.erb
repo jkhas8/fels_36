@@ -3,7 +3,8 @@
 <div class="filter form-actions">
   <%= form_for :word, method: :get do |f| %>
     Category:
-    <%= f.select :category_id, [["All", ""]] + Category.all.collect{|c| [c.name, c.id]} %>
+    <%= f.select :category_id,
+      [["All", ""]] + Category.all.collect{|c| [c.name, c.id]} %>
     Learned:
     <%= f.radio_button 'learned', '1' %>
     Not learned:

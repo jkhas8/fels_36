@@ -10,8 +10,13 @@ class LessionsController < ApplicationController
   def create
     @category = Category.find params[:category_id]
     @lession = Lession.new user: current_user, category: @category
-    @words = @category.words.sample 20
-    @words.each do |word|
+    if params[:lession_id].blank?
+      words = @category.words.sample 20
+    else
+      current_lession = Lession.find params[:lession_id]
+      words = current_lession.results.map(&:word)
+    end
+    words.shuffle.each do |word|
       @lession.results.build word: word
     end
     if @lession.save
