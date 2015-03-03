@@ -1,0 +1,10 @@
+<% provide(:title, "Lessions|#{@category.name}") %>
+<% if @lessions.any? %>
+  <%= will_paginate %>
+  <ul class="lessions">
+    <%= render partial: "lession", collection: @lessions %>
+  </ul>
+  <%= will_paginate %>
+<% else %>
+  You haven't started any lessions in this category yet.
+<% end %>
