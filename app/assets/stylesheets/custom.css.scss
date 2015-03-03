@@ -154,6 +154,19 @@ aside {
   margin-top: 15px;
 }
 
+.activities .gravatar {
+  float: none;
+  margin: 5px;
+}
+
+.admin a {
+  margin: 0 5px;
+}
+
+.question .word {
+  font-size: 500%;
+}
+
 .stats {
   overflow: auto;
   margin-top: 0;
@@ -190,6 +203,10 @@ aside {
 
 .users.follow {
   padding: 0;
+}
+
+.home-button .btn {
+  margin: 0px 30px;
 }
 
 /* forms */
@@ -257,6 +274,15 @@ input {
     color: $gray-light;
     display: block;
     margin-left: 10px;
+  }
+}
+
+/* Categories */
+.categories {
+  list-style: none;
+  li {
+    padding: 10px 0;
+    overflow: auto;
   }
 }
 

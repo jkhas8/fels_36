@@ -8,8 +8,8 @@ class Lession < ActiveRecord::Base
   after_create :create_new_lession_activity
   after_update :create_finish_lession_activity
 
-  def check_correct_answer lession
-    lession.results.select{|result|
+  def check_correct_answer
+    self.results.select{|result|
       result.answer.correct? unless result.answer.nil?}.count
   end
 
