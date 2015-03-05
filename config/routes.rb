@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
-
   root 'static_pages#home'
   get 'help' => 'static_pages#help'
   get 'about' => 'static_pages#about'
@@ -24,5 +22,8 @@ Rails.application.routes.draw do
   end
   resources :categories do
     resources :lessions
+  end
+  resources :lessions do
+    resources :results
   end
 end

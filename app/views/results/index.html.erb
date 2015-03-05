@@ -1,0 +1,27 @@
+<% provide(:title, "Result|Lession #{@lession.id}") %>
+<div class="row">
+  <%= content_tag :h1, "Lession #{@lession.id}" %>
+  <% if @lession.learned %>
+    <%= content_tag :p,"You have " +
+       pluralize(@lession.check_correct_answer(@lession), "correct answer"),
+       class: "correct" %>
+    <ul class="words">
+      <% @lession.results.each do |result| %>
+        <li>
+          <div class="content">
+            <% if !result.answer.nil? && result.answer.correct? %>
+              <div class="true"></div>
+            <% else %>
+              <div class="wrong"></div>
+            <% end %>
+            <%= content_tag :span, result.word.content %>
+          </div>
+          <div class="meaning">
+            <%= content_tag :span,
+              result.answer.nil? ? "" : result.answer.content %>
+          </div>
+        </li>
+      <% end %>
+    </div>
+  <% end %>
+</div>

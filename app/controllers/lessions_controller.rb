@@ -32,7 +32,7 @@ class LessionsController < ApplicationController
     unless @lession.learned
       @lession.learned = true
       if @lession.update_attributes params_lession
-        render 'show'
+        redirect_to lession_results_path(@lession)
       end
     else
       flash[:warning] = "You had learned this lession!"
@@ -42,6 +42,7 @@ class LessionsController < ApplicationController
 
   def show
     @lession = Lession.find params[:id]
+    redirect_to lession_results_path(@lession) if @lession.learned
   end
 
   private
