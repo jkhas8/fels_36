@@ -76,7 +76,9 @@ class User < ActiveRecord::Base
   def mine_without_follow
     activities = Activity.arel_table
     activities.grouping(activities[:user_id].eq(id)
-      .and(activities[:target_type].not_in(["Follower", "Followed"])))
+      .and(activities[:name].not_in([
+              "start_following", "stop_following",
+              "get_followed", "get_unfollowed"])))
   end
 
   def belong_to_following

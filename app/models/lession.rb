@@ -15,12 +15,10 @@ class Lession < ActiveRecord::Base
 
   private
   def create_new_lession_activity
-    user.activities.create!(target_type: "Lession",
-                            target_id: id, action_type: 1)
+    user.activities.create! target: self, name: 'start_learning'
   end
 
   def create_finish_lession_activity
-    user.activities.create!(target_type: "Lession",
-                            target_id: id, action_type: 4)
+    user.activities.create! target: self, name: 'finish_learning'
   end
 end
