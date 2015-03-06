@@ -3,7 +3,7 @@
   <%= content_tag :h1, "Lession #{@lession.id}" %>
   <% if @lession.learned %>
     <%= content_tag :p,"You have " +
-       pluralize(@lession.check_correct_answer(@lession), "correct answer"),
+       pluralize(@lession.check_correct_answer, "correct answer"),
        class: "correct" %>
     <ul class="words">
       <% @lession.results.each do |result| %>
