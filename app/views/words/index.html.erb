@@ -1,17 +1,21 @@
 <% provide(:title, 'All words') %>
 <h1>All words</h1>
 <div class="filter form-actions">
-  <%= form_for :word, method: :get do |f| %>
+  <%= form_tag words_path, method: :get do %>
     Category:
-    <%= f.select :category_id, category_list,
-      selected: category_selected(@category) %>
+    <%= select_tag :category_id,
+      options_from_collection_for_select(Category.all.collect,
+                                         "id",
+                                         "name",
+                                         @category_id.to_i),
+      prompt: "All" %>
     Learned:
-    <%= f.radio_button 'learned', '1', checked: @learned==1 %>
+    <%= radio_button_tag 'learned', '1', @learned == 1 %>
     Not learned:
-    <%= f.radio_button 'learned', '0', checked: @learned==0 %>
+    <%= radio_button_tag 'learned', '0', @learned == 0 %>
     All:
-    <%= f.radio_button 'learned', '-1', checked: @learned==-1 %>
-    <%= f.submit 'Filter', :class=>'filter_submit' %>
+    <%= radio_button_tag 'learned', '-1', @learned == -1 %>
+    <%= submit_tag 'Filter', class: 'filter_submit' %>
   <% end %>
 </div>
 <%= will_paginate %>
