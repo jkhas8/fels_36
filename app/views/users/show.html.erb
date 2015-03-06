@@ -13,14 +13,7 @@
   </aside>
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
-    <% if @activities.any? %>
-      <h3>Activities (<%= @user.activities.count %>)</h3>
-      <ol class="activities">
-        <%= render @activities %>
-      </ol>
-      <%= link_to_if(@activities.next_page, "Load more",
-                     user_path(@user, page: @activities.next_page),
-                     class: "load-more", remote: true) {|_|} %>
-    <% end %>
+    <%= render 'shared/activities', activities: @activities,
+      path: user_path(@user, page: @activities.next_page), text: "Activities" %>
   </div>
 </div>

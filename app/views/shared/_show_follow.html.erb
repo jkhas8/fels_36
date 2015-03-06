@@ -18,12 +18,14 @@
     </section>
   </aside>
   <div class="col-md-8">
-    <h3><%= @title %></h3>
     <% if @users.any? %>
+      <%= content_tag :h3, @title %>
       <ul class="users follow">
         <%= render @users %>
       </ul>
       <%= will_paginate @users %>
+    <% else %>
+      <%= content_tag :h1, "Nobody here" %>
     <% end %>
   </div>
 </div>

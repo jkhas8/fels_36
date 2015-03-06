@@ -1,13 +1,13 @@
 <% provide(:title, 'All categories') %>
-<h1>All categories</h1>
+<%= content_tag :h1, "All categories" %>
 
-<%= will_paginate %>
-
-<ul class="categories">
-  <%= render @categories %>
-</ul>
-
-<%= will_paginate %>
+<% if @categories.any? %>
+  <%= will_paginate %>
+    <%= content_tag :ul, render(@categories), class: 'categories' %>
+  <%= will_paginate %>
+<% else %>
+  <%= content_tag :h3, "No categories yet, please come back later." %>
+<% end %>
 
 <hr/>
 
