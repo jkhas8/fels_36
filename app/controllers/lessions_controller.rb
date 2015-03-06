@@ -36,7 +36,7 @@ class LessionsController < ApplicationController
       end
     else
       flash[:warning] = "You had learned this lession!"
-      render 'show'
+      redirect_to lession_results_path @lession
     end
   end
 
