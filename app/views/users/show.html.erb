@@ -18,7 +18,9 @@
       <ol class="activities">
         <%= render @activities %>
       </ol>
-      <%= will_paginate @activities %>
+      <%= link_to_if(@activities.next_page, "Load more",
+                     user_path(@user, page: @activities.next_page),
+                     class: "load-more", remote: true) {|_|} %>
     <% end %>
   </div>
 </div>

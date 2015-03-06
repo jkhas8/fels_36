@@ -32,3 +32,25 @@ function show_questions() {
   current_question.removeClass("current");
   current_question.next().addClass("current");
 }
+
+var loading = false;
+var scrollListener = function () {
+  $link = $('a.load-more');
+  $(window).on("scroll", function () {
+    if ($(window).scrollTop() >= $(document).height() - $(window).height() - 100) {
+      if (loading || !$link.length) return;
+      loading = true;
+      $.ajax({
+        type: "GET",
+        url: $link.attr('href'),
+        dataType: "script",
+        success: function () {
+          loading = false;
+          $link = $('a.load-more');
+        }
+      });
+    }
+  });
+};
+$(document).ready(scrollListener);
+$(document).on('page:load', scrollListener);
