@@ -47,9 +47,7 @@ class User < ActiveRecord::Base
   end
 
   def feed
-    Activity.where("user_id IN (:following_ids) OR
-                   (user_id = :user_id AND target_type NOT IN ('Follower', 'Followed'))",
-                    user_id: id, following_ids: following_ids)
+    Activity.where belong_to_following.or mine_without_follow
   end
 
   def follow other
@@ -72,5 +70,17 @@ class User < ActiveRecord::Base
     Word.all.select do |word|
       !learned_words.include? word
     end
+  end
+
+  private
+  def mine_without_follow
+    activities = Activity.arel_table
+    activities.grouping(activities[:user_id].eq(id)
+      .and(activities[:target_type].not_in(["Follower", "Followed"])))
+  end
+
+  def belong_to_following
+    activities = Activity.arel_table
+    activities[:user_id].in(following_ids)
   end
 end
