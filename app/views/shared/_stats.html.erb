@@ -13,3 +13,7 @@
     followers
   </a>
 </div>
+<div class="stats">
+  <%= link_to("Learned " + pluralize(@user.learned_words.count, "word"),
+              words_path(word: {learned: 1})) %>
+</div>

@@ -2,7 +2,7 @@
 <div class="row">
   <% if @lession.learned %>
     <%= content_tag :p,"You have " +
-      pluralize(@lession.check_correct_answer(@lession), "correct answer"),
+      pluralize(@lession.check_correct_answer, "correct answer"),
       class: "correct" %>
   <% end %>
   <%= form_for @lession, :url => {action: "update"} do |f| %>
@@ -10,7 +10,7 @@
       <%= content_tag :div, class: i == 0 ? "question current" : "question",
         id: result.word.id do %>
         <%= content_tag :p, "Question #{i+1}/#{@lession.results.count}" %>
-        <b><%= result.word.content %></b><br />
+        <span class="word"><%= result.word.content %></span><br />
         <%= f.fields_for :results, result do |builder| %>
           <% result.word.answers.shuffle.each do |answer| %>
             <%= builder.radio_button :answer_id, answer.id,

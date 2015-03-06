@@ -59,3 +59,24 @@ user = User.first
 lession = category.lessions.create!(user: user)
 20.times {|_| lession.results.create! word: category.words.first}
 
+# Sample category
+my_category = Category.create!(name: "Kanji for JLPT 4",
+                            description: "For all of you")
+contents = %w{校 大 東 水 先 男 右 西 話 友 午 川 左 高 百 母 上 読 八 生 北 国}
+means = ["trường học", "to", "hướng đông", "nước", "trước", "nam", "bên phải",
+         "hướng tây", "câu chuyện", "bạn", "giữa trưa", "sông", "bên trái",
+         "cao", "một trăm", "mẹ", "bên trên", "đọc", "tám", "sống",
+         "hướng bắc", "đất nước"]
+contents.each_with_index do |content, i|
+  meaning = means[i]
+  word = my_category.words.build content: content, meaning: meaning
+  word.answers.build content: meaning, correct: true
+  3.times do |_|
+    begin
+      other_answer = means[Random.rand(means.length)]
+    end until other_answer != meaning
+    word.answers.build content: other_answer, correct: false
+  end
+end
+my_category.save!
+

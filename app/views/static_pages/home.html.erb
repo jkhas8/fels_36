@@ -9,6 +9,10 @@
       </section>
     </aside>
     <div class="col-md-8">
+      <div class="row center home-button">
+        <%= link_to "Words", words_path, class: "btn btn-lg btn-primary" %>
+        <%= link_to "Lession", categories_path, class: "btn btn-lg btn-primary" %>
+      </div>
       <h3>Activities Feed</h3>
       <% if @activities.any? %>
         <ol class="activities">

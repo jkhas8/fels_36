@@ -1,29 +1,30 @@
 <li id="activity-<%= activity.id %>">
-  <span>
+  <div>
     <% case activity.target_type
        when "Follower" %>
       <% case activity.action_type
          when 1 %>
-        <%= get_user_name activity.target_id %> start following <%= get_user_name activity.user_id %>
+        <%= get_user activity.target_id %> start following <%= get_user activity.user_id %>
       <% when 4 %>
-        <%= get_user_name activity.target_id %> stop following <%= get_user_name activity.user_id %>
+        <%= get_user activity.target_id %> stop following <%= get_user activity.user_id %>
       <% end %>
     <% when "Followed" %>
       <% case activity.action_type
          when 1 %>
-        <%= get_user_name activity.user_id %> start following <%= get_user_name activity.target_id %>
+        <%= get_user activity.user_id %> start following <%= get_user activity.target_id %>
       <% when 4 %>
-        <%= get_user_name activity.user_id %> stop following <%= get_user_name activity.target_id %>
+        <%= get_user activity.user_id %> stop following <%= get_user activity.target_id %>
       <% end %>
     <% when "Lession" %>
       <% case activity.action_type
          when 1 %>
-        <%= get_user_name activity.user_id %> start a lession in <%= get_category_by_lession(activity.target_id).name %>
+        <%= get_user activity.user_id %> start a lession in <%= get_category_by_lession(activity.target_id).name %>
       <% when 4 %>
-        <%= get_user_name activity.user_id %> finish a lession in <%= get_category_by_lession(activity.target_id).name %>
+        <%= get_user activity.user_id %> finish a lession in <%= get_category_by_lession(activity.target_id).name %>
+        with <%= pluralize(Lession.find(activity.target_id).check_correct_answer, "correct answer") %>
       <% end %>
     <% end %>
-  </span>
+  </div>
   <span class="timestamp">
     <%= time_ago_in_words(activity.created_at) %> ago.
   </span>
