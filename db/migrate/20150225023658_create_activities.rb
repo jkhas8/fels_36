@@ -4,7 +4,7 @@ class CreateActivities < ActiveRecord::Migration
       t.references :user, index: true
       t.integer :target_id
       t.string :target_type
-      t.integer :action_type
+      t.string :name
 
       t.timestamps null: false
     end

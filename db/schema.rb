@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20150225023658) do
     t.integer  "user_id"
     t.integer  "target_id"
     t.string   "target_type"
-    t.integer  "action_type"
+    t.string   "name"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

@@ -10,16 +10,12 @@ class Relationship < ActiveRecord::Base
 
   private
   def create_follow_activity
-    follower.activities.create!(target_type: "Followed",
-                                target_id: followed.id, action_type: 1)
-    followed.activities.create!(target_type: "Follower",
-                                target_id: follower.id, action_type: 1)
+    follower.activities.create!(target: followed, name: 'start_following')
+    followed.activities.create!(target: follower, name: 'get_followed')
   end
 
   def create_unfollow_activity
-    follower.activities.create!(target_type: "Followed",
-                                target_id: followed.id, action_type: 4)
-    followed.activities.create!(target_type: "Follower",
-                                target_id: follower.id, action_type: 4)
+    follower.activities.create!(target: followed, name: 'stop_following')
+    followed.activities.create!(target: follower, name: 'get_unfollowed')
   end
 end
