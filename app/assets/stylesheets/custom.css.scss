@@ -231,9 +231,9 @@ input {
   }
 }
 
-#session_remember_me {
+.inline-checkbox {
   width: auto;
-  margin-left: 0;
+  margin-left: 0 !important;
 }
 
 #error_explanation {

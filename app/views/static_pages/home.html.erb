@@ -11,7 +11,7 @@
     <%= content_tag :div, class: "col-md-8" do %>
       <%= content_tag :div, class: "row center home-button" do %>
         <%= link_to "Words", words_path, class: "btn btn-lg btn-primary" %>
-        <%= link_to "Lession", categories_path, class: "btn btn-lg btn-primary" %>
+        <%= link_to "Lesson", categories_path, class: "btn btn-lg btn-primary" %>
       <% end %>
       <%= render 'shared/activities', activities: @activities,
         path: root_path(@user, page: @activities.next_page),

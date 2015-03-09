@@ -2,7 +2,7 @@
 <%= content_tag :div, class: "row" do %>
   <%= content_tag :h1, "Lesson #{@lesson.id}" %>
   <% if @lesson.learned %>
-    <%= content_tag :div, class: "col-md-4 col-md-offset-4" do %>
+    <%= content_tag :div, class: "col-md-6 col-md-offset-3" do %>
       <%= content_tag :p,"You have " +
          pluralize(@lesson.check_correct_answer, "correct answer"),
          class: "correct" %>

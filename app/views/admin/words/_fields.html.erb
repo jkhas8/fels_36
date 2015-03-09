@@ -1,10 +1,10 @@
 <%= render 'shared/error_messages', object: f.object %>
 
 <%= f.label :content %>
-<%= f.text_field :content, class: "form_control" %>
+<%= f.text_field :content, class: "form-control" %>
 
 <%= f.label :meaning %>
-<%= f.text_field :meaning, class: "form_control" %>
+<%= f.text_field :meaning, class: "form-control" %>
 
 <%= f.fields_for :answers do |builder| %>
   <%= render 'answer_fields', f: builder %>

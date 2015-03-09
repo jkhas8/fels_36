@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :check_login, only: [:new]
+
   def new
   end
 
@@ -9,7 +11,7 @@ class SessionsController < ApplicationController
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_back_or root_path
     else
-      flash[:danger] = 'Invalid email or password!'
+      flash.now[:danger] = 'Invalid email or password!'
       render 'new'
     end
   end
@@ -17,5 +19,13 @@ class SessionsController < ApplicationController
   def destroy
     log_out if logged_in?
     redirect_to root_url
+  end
+
+  private
+  def check_login
+    if logged_in?
+      flash[:warning] = "You had been logged in."
+      redirect_to root_path
+    end
   end
 end
