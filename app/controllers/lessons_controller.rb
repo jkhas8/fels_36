@@ -31,20 +31,22 @@ class LessonsController < ApplicationController
 
   def update
     @lesson = Lesson.find params[:id]
-    unless @lesson.learned
+    if !@lesson.learned && current_user?(@lession.user)
       @lesson.learned = true
       if @lesson.update_attributes params_lesson
         redirect_to lesson_results_path(@lesson)
       end
     else
-      flash[:warning] = "You had learned this lesson!"
+      flash[:warning] = "You had learned this lesson!" if @lesson.learned
       redirect_to lesson_results_path @lesson
     end
   end
 
   def show
     @lesson = Lesson.find params[:id]
-    redirect_to lesson_results_path(@lesson) if @lesson.learned
+    if @lesson.learned || !current_user?(@lesson.user)
+      redirect_to lesson_results_path(@lesson)
+    end
   end
 
   private
