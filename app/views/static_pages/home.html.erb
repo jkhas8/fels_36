@@ -1,32 +1,27 @@
 <% if logged_in? %>
-  <div class="row">
-    <aside class="col-md-4">
-      <section class="user_info">
+  <%= content_tag :div, class: "row" do %>
+    <%= content_tag :aside, class: "col-md-4" do %>
+      <%= content_tag :section, class: "user_info" do %>
         <%= render 'shared/user_info' %>
-      </section>
-      <section class="stats">
+      <% end %>
+      <%= content_tag :section, class: "stats" do %>
         <%= render 'shared/stats' %>
-      </section>
-    </aside>
-    <div class="col-md-8">
-      <div class="row center home-button">
+      <% end %>
+    <% end %>
+    <%= content_tag :div, class: "col-md-8" do %>
+      <%= content_tag :div, class: "row center home-button" do %>
         <%= link_to "Words", words_path, class: "btn btn-lg btn-primary" %>
         <%= link_to "Lession", categories_path, class: "btn btn-lg btn-primary" %>
-      </div>
+      <% end %>
       <%= render 'shared/activities', activities: @activities,
         path: root_path(@user, page: @activities.next_page),
         text: "Activities Feed" %>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 <% else %>
-  <div class="center jumbotron">
-    <h1>Welcome to the E-learner System</h1>
-
-    <h2>
-      This is the home page for the
-      E-learner System.
-    </h2>
-
+  <%= content_tag :div, class: "center jumbotron" do %>
+    <%= content_tag :h1, "Welcome to the E-learner System" %>
+    <%= content_tag :h2, "This is the home page for the E-learner System." %>
     <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
-  </div>
+  <% end %>
 <% end %>

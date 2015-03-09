@@ -1,4 +1,4 @@
-<li>
+<%= content_tag :li do %>
   <%= link_to content_tag(:h1, category.name),
               category_lessions_path(category) %>
   <%= content_tag :h2,
@@ -8,11 +8,11 @@
   <%= link_to 'Start', category_lessions_path(category), method: :post,
                        class: "btn btn-lg btn-primary" %>
   <% if current_user.admin? %>
-    <span class="admin">
+    <%= content_tag :span, class: "admin" do %>
       <%= link_to "add word", new_admin_category_word_path(category) %>
       <%= link_to "edit", edit_admin_category_path(category) %>
       <%= link_to "delete", admin_category_path(category), method: :delete,
                                       data: {confirm: 'You sure?'} %>
-    </span>
+    <% end %>
   <% end %>
-</li>
+<% end %>

@@ -1,5 +1,5 @@
 <% unless current_user? @user %>
-  <div id="follow_form">
+  <%= content_tag :div, id: "follow_form" do %>
     <%= render current_user.following?(@user) ? 'unfollow' : 'follow' %>
-  </div>
+  <% end %>
 <% end %>

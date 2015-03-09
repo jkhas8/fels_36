@@ -1,31 +1,31 @@
 <% provide(:title, @title) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
+<%= content_tag :div, class: "row" do %>
+  <%= content_tag :aside, class: "col-md-4" do %>
+    <%= content_tag :section, class: "user_info" do %>
       <%= gravatar_for @user %>
-      <h1><%= @user.name %></h1>
-      <span><%= link_to "view my profile", @user %></span>
-    </section>
-    <section class="stats">
+      <%= content_tag :h1, @user.name %>
+      <%= content_tag :span, link_to("view my profile", @user) %>
+    <% end %>
+    <%= content_tag :section, class: "stats" do %>
       <%= render 'shared/stats' %>
       <% if @users.any? %>
-        <div class="user_avatars">
+        <%= content_tag :div, class: "user_avatars" do %>
           <% @users.each do |user| %>
             <%= link_to gravatar_for(user, size: 30), user %>
           <% end %>
-        </div>
+        <% end %>
       <% end %>
-    </section>
-  </aside>
-  <div class="col-md-8">
+    <% end %>
+  <% end %>
+  <%= content_tag :div, class: "col-md-8" do %>
     <% if @users.any? %>
       <%= content_tag :h3, @title %>
-      <ul class="users follow">
+      <%= content_tag :ul, class: "users follow" do %>
         <%= render @users %>
-      </ul>
+      <% end %>
       <%= will_paginate @users %>
     <% else %>
       <%= content_tag :h1, "Nobody here" %>
     <% end %>
-  </div>
-</div>
+  <% end %>
+<% end %>

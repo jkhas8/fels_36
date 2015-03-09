@@ -1,27 +1,31 @@
 <% provide(:title, 'All words') %>
-<h1>All words</h1>
-<div class="filter form-actions">
+<%= content_tag :h1, "All words" %>
+<%= content_tag :div, class: "filter form-actions" do %>
   <%= form_tag words_path, method: :get do %>
-    Category:
+    <%= label_tag :category_id, "Category:" %>
     <%= select_tag :category_id,
       options_from_collection_for_select(Category.all.collect,
                                          "id",
                                          "name",
                                          @category_id.to_i),
       prompt: "All" %>
-    Learned:
     <%= radio_button_tag 'learned', '1', @learned == 1 %>
-    Not learned:
+    <%= label_tag 'learned_1', "Learned" %>
     <%= radio_button_tag 'learned', '0', @learned == 0 %>
-    All:
+    <%= label_tag 'learned_0', "Not learned" %>
     <%= radio_button_tag 'learned', '-1', @learned == -1 %>
+    <%= label_tag 'learned_-1', "All" %>
     <%= submit_tag 'Filter', class: 'filter_submit' %>
   <% end %>
-</div>
-<%= will_paginate %>
-<ul class="words">
-  <% @words.each do |word| %>
-    <%= render word %>
+<% end %>
+<% if @words.blank? %>
+  <%= content_tag :p, "There are no words with this filter!" %>
+<% else %>
+  <%= will_paginate %>
+  <%= content_tag :ul, class: "words col-md-4 col-md-offset-4" do %>
+    <% @words.each do |word| %>
+      <%= render word %>
+    <% end %>
   <% end %>
-</ul>
-<%= will_paginate %>
+  <%= will_paginate %>
+<% end %>

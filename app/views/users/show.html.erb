@@ -1,19 +1,19 @@
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section>
-      <h1>
+<%= content_tag :div, class: "row" do %>
+  <%= content_tag :aside, class: "col-md-4" do %>
+    <%= content_tag :section do %>
+      <%= content_tag :h1 do %>
         <%= gravatar_for @user %>
         <%= @user.name %>
-      </h1>
-    </section>
-    <section class="stats">
+      <% end %>
+    <% end %>
+    <%= content_tag :section, class: "stats" do %>
       <%= render 'shared/stats' %>
-    </section>
-  </aside>
-  <div class="col-md-8">
+    <% end %>
+  <% end %>
+  <%= content_tag :div, class: "col-md-8" do %>
     <%= render 'follow_form' if logged_in? %>
     <%= render 'shared/activities', activities: @activities,
       path: user_path(@user, page: @activities.next_page), text: "Activities" %>
-  </div>
-</div>
+  <% end %>
+<% end %>

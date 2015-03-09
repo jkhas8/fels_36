@@ -1,18 +1,18 @@
 <% @user ||= current_user %>
-<div class="stats">
-  <a href="<%= user_followings_path @user %>">
-    <strong id="following" class="stat">
+<%= content_tag :div, class: "stats" do %>
+  <%= link_to user_followings_path @user do %>
+    <%= content_tag :strong, id: "following", class: "stat" do %>
       <%= @user.following.count %>
-    </strong>
+    <% end %>
     following
-  </a>
-  <a href="<%= user_followers_path @user %>">
-    <strong id="followers" class="stat">
+  <% end %>
+  <%= link_to user_followers_path @user do %>
+    <%= content_tag :strong, id: "followers", class: "stat" do %>
       <%= @user.followers.count %>
-    </strong>
+    <% end %>
     followers
-  </a>
-</div>
-<div class="stats">
+  <% end %>
+<% end %>
+<%= content_tag :div, class: "stats" do %>
   Learned  <%= pluralize(@user.learned_words.count, "word") %>
-</div>
+<% end %>

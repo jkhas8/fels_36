@@ -9,6 +9,6 @@
   <%= content_tag :h3, "No categories yet, please come back later." %>
 <% end %>
 
-<hr/>
+<%= content_tag :hr %>
 
 <%= render 'category_form' if logged_in? && current_user.admin? %>

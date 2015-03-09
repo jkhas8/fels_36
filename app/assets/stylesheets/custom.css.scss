@@ -290,7 +290,6 @@ input {
 
 .words {
   list-style: none;
-  margin: 0;
   li {
     overflow: auto;
     padding: 10px 0;
@@ -310,12 +309,22 @@ input {
   }
 }
 
+div .pagination {
+  width: 100%;
+  text-align: center;
+}
+
 .filter {
+  text-align: center;
   input {
-    width: 30px;
+    width: 15px;
   }
   select {
-    width: 100px;
+    width: 300px;
+    margin-right: 20px;
+  }
+  label {
+    margin-right: 10px;
   }
   .filter_submit {
     background: #3498db;
@@ -422,4 +431,8 @@ div.true {
 
 .button_to {
   float: right;
+}
+
+.answer {
+  margin: 15px 0;
 }

@@ -1,9 +1,9 @@
 <% provide(:title, "Lessions|#{@category.name}") %>
 <% if @lessions.any? %>
   <%= will_paginate %>
-  <ul class="lessions">
+  <%= content_tag :ul, class: "lessions" do %>
     <%= render partial: "lession", collection: @lessions %>
-  </ul>
+  <% end %>
   <%= will_paginate %>
 <% else %>
   You haven't started any lessions in this category yet.
