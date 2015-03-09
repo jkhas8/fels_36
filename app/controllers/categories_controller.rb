@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.all.paginate page: params[:page]
     @category = Category.new if current_user.admin?
-    @lession = Lession.new
+    @lesson = Lesson.new
   end
 
 end

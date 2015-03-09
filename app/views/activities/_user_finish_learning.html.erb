@@ -1,4 +1,4 @@
-<%= get_user user %> finish a <%= content_tag :b, link_to("lession", target) %>
+<%= get_user user %> finish a <%= content_tag :b, link_to("lesson", target) %>
 in <%= content_tag :b,
-  link_to(target.category.name, category_lessions_path(target.category)) %>
+  link_to(target.category.name, category_lessons_path(target.category)) %>
 with <%= pluralize target.check_correct_answer, "correct answer" %>

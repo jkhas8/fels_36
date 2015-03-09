@@ -1,11 +1,11 @@
 <%= content_tag :li do %>
   <%= link_to content_tag(:h1, category.name),
-              category_lessions_path(category) %>
+              category_lessons_path(category) %>
   <%= content_tag :h2,
     "You've learned \
     #{category.words_learned_by(current_user).count}/#{category.words.count}" %>
   <%= content_tag :p, category.description %>
-  <%= link_to 'Start', category_lessions_path(category), method: :post,
+  <%= link_to 'Start', category_lessons_path(category), method: :post,
                        class: "btn btn-lg btn-primary" %>
   <% if current_user.admin? %>
     <%= content_tag :span, class: "admin" do %>

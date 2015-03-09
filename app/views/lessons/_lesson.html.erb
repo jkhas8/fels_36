@@ -1,0 +1,12 @@
+<%= content_tag :li do %>
+  <%= link_to "Lesson #{lesson.id}",
+    category_lesson_path(@category, lesson) %>
+  <% if lesson.learned %>
+    <%= content_tag :span, "Correct:
+      #{lesson.check_correct_answer}/#{lesson.results.size}" %>
+    <%= button_to 'Re-learn', category_lessons_path(@category), method: :post,
+      params: {lesson_id: lesson.id}, class: "btn btn-xs btn-primary" %>
+  <% else %>
+    <%= "Not learned." %>
+  <% end %>
+<% end %>

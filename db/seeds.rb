@@ -53,11 +53,11 @@ categories.each do |category|
   end
 end
 
-# Lessions
+# Lessons
 category = Category.first
 user = User.first
-lession = category.lessions.create!(user: user)
-20.times {|_| lession.results.create! word: category.words.first}
+lesson = category.lessons.create!(user: user)
+20.times {|_| lesson.results.create! word: category.words.first}
 
 # Sample category
 my_category = Category.create!(name: "Kanji for JLPT 4",

@@ -8,8 +8,8 @@ class Word < ActiveRecord::Base
 
   validate :check_has_correct_answer
 
-  scope :learned_by, ->(user){joins(results: :lession).where(
-    lessions: {user_id: user}).distinct}
+  scope :learned_by, ->(user){joins(results: :lesson).where(
+    lessons: {user_id: user}).distinct}
 
   scope :not_learned_by, ->(user){where.not id: learned_by(user).map(&:id)}
 

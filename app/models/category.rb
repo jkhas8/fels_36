@@ -1,11 +1,11 @@
 class Category < ActiveRecord::Base
   has_many :words, dependent: :destroy
-  has_many :lessions, dependent: :destroy
+  has_many :lessons, dependent: :destroy
 
   validates :name, presence: true
   validates :description, presence: true
 
-  accepts_nested_attributes_for :lessions
+  accepts_nested_attributes_for :lessons
 
   def words_learned_by user
     self.words.learned_by user
