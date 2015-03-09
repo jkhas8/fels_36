@@ -8,13 +8,10 @@ class Category < ActiveRecord::Base
   accepts_nested_attributes_for :lessions
 
   def words_learned_by user
-    user.lessions.select{|lession| lession.category == self}.
-      map(&:results).flatten.map(&:word).uniq
+    self.words.learned_by user
   end
 
   def words_not_learned_by user
-    Word.all.select{|lession| lession.category == self}.select do |word|
-      !user.learned_words.include? word
-    end
+    self.words.not_learned_by user
   end
 end
