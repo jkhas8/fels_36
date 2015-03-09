@@ -63,13 +63,11 @@ class User < ActiveRecord::Base
   end
 
   def learned_words
-    lessions.map(&:results).flatten.map(&:word).uniq
+    Word.learned_by self
   end
 
   def not_learned_words
-    Word.all.select do |word|
-      !learned_words.include? word
-    end
+    Word.not_learned_by self
   end
 
   private
