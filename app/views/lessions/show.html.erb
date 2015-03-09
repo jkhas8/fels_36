@@ -1,5 +1,5 @@
 <% provide(:title, "Lession|#{@lession.category.name}") %>
-<div class="row">
+<%= content_tag :div, class: "row" do %>
   <% if @lession.learned %>
     <%= content_tag :p,"You have " +
       pluralize(@lession.check_correct_answer, "correct answer"),
@@ -23,7 +23,7 @@
                 <%= builder.label :answer_id, answer.content, value: answer.id,
                   class: answer.correct && @lession.learned ?
                   "correct" : "" %>
-                <br />
+                <%= content_tag :br %>
               <% end %>
             <% end %>
             <% if i == 19 %>
@@ -36,4 +36,4 @@
       <% end %>
     <% end %>
   <% end %>
-</div>
+<% end %>

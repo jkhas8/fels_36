@@ -1,9 +1,9 @@
-<li id="activity-<%= activity.id %>">
-  <div>
+<%= content_tag :li, id: "activity-#{activity.id}" do %>
+  <%= content_tag :div do %>
     <%= render "activities/user_#{activity.name}", user: activity.user,
                                         target: activity.target %>
-  </div>
-  <span class="timestamp">
+  <% end %>
+  <%= content_tag :span, class: "timestamp" do %>
     <%= time_ago_in_words(activity.created_at) %> ago.
-  </span>
-</li>
+  <% end %>
+<% end %>

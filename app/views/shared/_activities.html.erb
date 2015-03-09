@@ -1,8 +1,8 @@
 <% if activities.any? %>
   <%= content_tag :h3, "#{text}  (#{activities.count})" %>
-  <ol class="activities">
+  <%= content_tag :ol, class: "activities" do %>
     <%= render activities %>
-  </ol>
+  <% end %>
   <%= link_to_if(activities.next_page, "Load more",
                  path, class: "load-more", remote: true) {|_|} %>
 <% else %>

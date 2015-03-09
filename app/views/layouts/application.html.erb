@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= full_title(yield(:title)) %></title>
+<%= content_tag :html do %>
+  <%= content_tag :head do %>
+    <%= content_tag :title do %>
+      <%= full_title(yield(:title)) %>
+    <% end %>
     <%= stylesheet_link_tag 'application', media: 'all',
                                            'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
-  </head>
-  <body>
+  <% end %>
+  <%= content_tag :body do %>
     <%= render 'layouts/header' %>
-    <div class="container">
+    <%= content_tag :div, class: "container" do %>
       <% flash.each do |message_type, message| %>
         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
       <% end %>
       <%= yield %>
       <%= render 'layouts/footer' %>
       <%= debug(params) if Rails.env.development? %>
-    </div>
-  </body>
-</html>
+    <% end %>
+  <% end %>
+<% end %>
