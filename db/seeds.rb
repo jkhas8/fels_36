@@ -6,58 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# Users
-User.create!(name:  "Example User",
-             email: "example@railstutorial.org",
-             password:              "foobar",
-             password_confirmation: "foobar",
+# Admin
+User.create!(name:  "Admin",
+             email: "admin@elearning.com.vn",
+             password:              "password",
+             password_confirmation: "password",
              admin: true)
-
-99.times do |n|
-  name  = Faker::Name.name
-  email = "example-#{n+1}@railstutorial.org"
-  password = "password"
-  User.create!(name: name,
-              email: email,
-              password:              password,
-              password_confirmation: password)
-end
-
-# Following relationships
-users = User.all
-user  = users.first
-following = users[2..50]
-followers = users[3..40]
-following.each {|followed| user.follow followed}
-followers.each {|follower| follower.follow user}
-
-# Categories
-10.times do |n|
-  name = Faker::Lorem.sentence(5)
-  description = Faker::Lorem.paragraph(50)
-  Category.create!(name: name, description: description)
-end
-
-# Words
-categories = Category.all
-categories.each do |category|
-  100.times do |n|
-    content = Faker::Lorem.word
-    meaning = Faker::Lorem.word
-    word = category.words.build(content: content, meaning: meaning)
-    word.answers.build(content: meaning, correct: true)
-    3.times do |a|
-      word.answers.build(content: Faker::Lorem.word, correct: false)
-    end
-    word.save!
-  end
-end
-
-# Lessons
-category = Category.first
-user = User.first
-lesson = category.lessons.create!(user: user)
-20.times {|_| lesson.results.create! word: category.words.first}
 
 # Sample category
 my_category = Category.create!(name: "Kanji for JLPT 4",
@@ -71,11 +25,9 @@ contents.each_with_index do |content, i|
   meaning = means[i]
   word = my_category.words.build content: content, meaning: meaning
   word.answers.build content: meaning, correct: true
-  3.times do |_|
-    begin
-      other_answer = means[Random.rand(means.length)]
-    end until other_answer != meaning
-    word.answers.build content: other_answer, correct: false
+  other_answers = means.select{|mean| mean != meaning}.sample 3
+  other_answers.each do |answer|
+    word.answers.build content: answer, correct: false
   end
 end
 my_category.save!

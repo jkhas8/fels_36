@@ -11,11 +11,13 @@
         id: result.word.id do %>
         <%= content_tag :p,
           "#{@lesson.category.name} #{i+1}/#{@lesson.results.count}" %>
-        <table><tr>
-          <td style="padding-right:30px">
-            <span class="word"><%= result.word.content %></span><br />
-          </td>
-          <td>
+          <%= content_tag :div, class: "col-md-4", style: "text-align: center" do %>
+            <%= content_tag :span, class: "word" do %>
+              <%= result.word.content %>
+            <% end %>
+            <%= content_tag :br %>
+          <% end %>
+          <%= content_tag :div, class: "col-md-4" do %>
             <%= f.fields_for :results, result do |builder| %>
               <% result.word.answers.shuffle.each do |answer| %>
                 <%= builder.radio_button :answer_id, answer.id,
@@ -31,8 +33,7 @@
             <% else %>
               <%= button_tag "Next", type: "button", onclick: "show_questions()" %>
             <% end %>
-          </td>
-        </tr></table>
+          <% end %>
       <% end %>
     <% end %>
   <% end %>

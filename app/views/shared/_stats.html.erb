@@ -14,5 +14,7 @@
   <% end %>
 <% end %>
 <%= content_tag :div, class: "stats" do %>
-  Learned  <%= pluralize(@user.learned_words.count, "word") %>
+  <%= link_to_if current_user?(@user),
+                 "Learned  #{pluralize(@user.learned_words.count, "word")}",
+                 words_path(learned: 1) %>
 <% end %>
