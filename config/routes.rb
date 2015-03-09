@@ -21,9 +21,9 @@ Rails.application.routes.draw do
     end
   end
   resources :categories do
-    resources :lessions
+    resources :lessons
   end
-  resources :lessions do
+  resources :lessons do
     resources :results
   end
 end

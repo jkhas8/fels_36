@@ -1,16 +1,16 @@
-<% provide(:title, "Lession|#{@lession.category.name}") %>
+<% provide(:title, "Lesson|#{@lesson.category.name}") %>
 <%= content_tag :div, class: "row" do %>
-  <% if @lession.learned %>
+  <% if @lesson.learned %>
     <%= content_tag :p,"You have " +
-      pluralize(@lession.check_correct_answer, "correct answer"),
+      pluralize(@lesson.check_correct_answer, "correct answer"),
       class: "correct" %>
   <% end %>
-  <%= form_for @lession, method: :patch do |f| %>
-    <% @lession.results.each_with_index do |result, i| %>
+  <%= form_for @lesson, method: :patch do |f| %>
+    <% @lesson.results.each_with_index do |result, i| %>
       <%= content_tag :div, class: i == 0 ? "question current" : "question",
         id: result.word.id do %>
         <%= content_tag :p,
-          "#{@lession.category.name} #{i+1}/#{@lession.results.count}" %>
+          "#{@lesson.category.name} #{i+1}/#{@lesson.results.count}" %>
         <table><tr>
           <td style="padding-right:30px">
             <span class="word"><%= result.word.content %></span><br />
@@ -19,15 +19,15 @@
             <%= f.fields_for :results, result do |builder| %>
               <% result.word.answers.shuffle.each do |answer| %>
                 <%= builder.radio_button :answer_id, answer.id,
-                  disabled: @lession.learned %>
+                  disabled: @lesson.learned %>
                 <%= builder.label :answer_id, answer.content, value: answer.id,
-                  class: answer.correct && @lession.learned ?
+                  class: answer.correct && @lesson.learned ?
                   "correct" : "" %>
                 <%= content_tag :br %>
               <% end %>
             <% end %>
             <% if i == 19 %>
-              <%= button_tag "Submit", type: "submit", disabled: @lession.learned %>
+              <%= button_tag "Submit", type: "submit", disabled: @lesson.learned %>
             <% else %>
               <%= button_tag "Next", type: "button", onclick: "show_questions()" %>
             <% end %>
