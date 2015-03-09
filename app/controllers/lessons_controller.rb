@@ -1,7 +1,9 @@
 class LessonsController < ApplicationController
   def index
     @category = Category.find params[:category_id]
-    @lessons = @category.lessons.paginate page: params[:page]
+    @lessons = @category.lessons.select do |lesson|
+      current_user? lesson.user
+    end.paginate page: params[:page]
   end
 
   def new
