@@ -11,23 +11,23 @@
       prompt: "All" %>
     <%= radio_button_tag 'learned', '1', @learned == 1 %>
     <%= label_tag 'learned_1', "Learned" %>
-    <%= radio_button_tag 'learned', '0', @learned == 0 %>
-    <%= label_tag 'learned_0', "Not learned" %>
     <%= radio_button_tag 'learned', '-1', @learned == -1 %>
-    <%= label_tag 'learned_-1', "All" %>
+    <%= label_tag 'learned_-1', "Not learned" %>
+    <%= radio_button_tag 'learned', '0', @learned == 0 %>
+    <%= label_tag 'learned_0', "All" %>
     <%= submit_tag 'Filter', class: 'filter_submit' %>
   <% end %>
 <% end %>
-<%= content_tag :div, class: "col-md-12" do %>
-  <% if @words.blank? %>
-    <%= content_tag :p, "There are no words with this filter!" %>
-  <% else %>
-    <%= will_paginate %>
-    <%= content_tag :ul, class: "words col-md-6 col-md-offset-3" do %>
-      <% @words.each do |word| %>
-        <%= render word %>
+<%= content_tag :div, class: "row" do %>
+  <%= content_tag :div, class: "col-md-12" do %>
+    <% if @words.blank? %>
+      <%= content_tag :p, "There are no words with this filter!" %>
+    <% else %>
+      <%= will_paginate %>
+      <%= content_tag :ul, class: "words col-md-6 col-md-offset-3" do %>
+        <%= render @words %>
       <% end %>
+      <%= will_paginate %>
     <% end %>
-    <%= will_paginate %>
   <% end %>
 <% end %>

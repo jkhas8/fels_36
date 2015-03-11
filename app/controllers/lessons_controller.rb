@@ -31,7 +31,7 @@ class LessonsController < ApplicationController
 
   def update
     @lesson = Lesson.find params[:id]
-    if !@lesson.learned && current_user?(@lession.user)
+    if !@lesson.learned && current_user?(@lesson.user)
       @lesson.learned = true
       if @lesson.update_attributes params_lesson
         redirect_to lesson_results_path(@lesson)
