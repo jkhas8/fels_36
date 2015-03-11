@@ -7,8 +7,10 @@
   <% end %>
   <%= content_tag :br %>
   <% if current_user.admin? %>
-    <%= link_to "edit", edit_admin_category_word_path(word.category, word) %>
+    <%= link_to "edit", edit_admin_category_word_path(word.category, word),
+                        class: "btn btn-sm btn-info" %>
     <%= link_to "delete", admin_category_word_path(word.category, word),
-                          method: :delete, data: {confirm: "You sure?"} %>
+                          method: :delete, data: {confirm: "You sure?"},
+                          class: "btn btn-sm btn-danger" %>
   <% end %>
 <% end %>

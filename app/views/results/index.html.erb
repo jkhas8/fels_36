@@ -3,7 +3,7 @@
   <%= content_tag :h1, "Lesson #{@lesson.id}" %>
   <% if @lesson.learned %>
     <%= content_tag :div, class: "col-md-6 col-md-offset-3" do %>
-      <%= content_tag :p,"You have " +
+      <%= content_tag :p,"Result: " +
          pluralize(@lesson.check_correct_answer, "correct answer"),
          class: "correct" %>
       <%= content_tag :ul, class: "words" do %>
@@ -25,5 +25,7 @@
         <% end %>
       <% end %>
     <% end %>
+  <% else %>
+    <%= content_tag :h3, "Haven't learned yet." %>
   <% end %>
 <% end %>

@@ -1,16 +1,24 @@
 <% provide(:title, 'All categories') %>
 <%= content_tag :h1, "All categories" %>
 
-<%= content_tag :div, class: "col-md-8 col-md-offset-2" do %>
-  <%= render 'category_form' if logged_in? && current_user.admin? %>
-  <%= content_tag :hr %>
-<% end %>
+<%= content_tag :div, class: "row" do %>
+  <%= content_tag :div, class: "col-md-8 col-md-offset-2" do %>
+    <%= render 'category_form' if logged_in? && current_user.admin? %>
+    <%= content_tag :hr %>
+  <% end %>
 
-<%= content_tag :div, class: "col-md-12" do %>
   <% if @categories.any? %>
-    <%= will_paginate %>
-      <%= content_tag :ul, render(@categories), class: 'categories' %>
-    <%= will_paginate %>
+    <% left, right = @categories.partition.with_index{|_, i| i.even?} %>
+    <%= content_tag :div, class: "col-md-12" do %>
+      <%= will_paginate %>
+        <%= content_tag :div, class: "col-md-6" do %>
+          <%= content_tag :ul, render(left), class: 'categories' %>
+        <% end %>
+        <%= content_tag :div, class: "col-md-6" do %>
+          <%= content_tag :ul, render(right), class: 'categories' %>
+        <% end %>
+      <%= will_paginate %>
+    <% end %>
   <% else %>
     <%= content_tag :h3, "No categories yet, please come back later." %>
   <% end %>
