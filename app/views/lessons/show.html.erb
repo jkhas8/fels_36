@@ -28,7 +28,7 @@
                 <%= content_tag :br %>
               <% end %>
             <% end %>
-            <% if i == 19 %>
+            <% if i == @lesson.results.count - 1 %>
               <%= button_tag "Submit", type: "submit", disabled: @lesson.learned %>
             <% else %>
               <%= button_tag "Next", type: "button", onclick: "show_questions()" %>
