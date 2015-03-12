@@ -294,6 +294,7 @@ input {
 
 .words {
   list-style: none;
+  padding: 0px;
   li {
     overflow: auto;
     padding: 10px 0;
@@ -302,6 +303,9 @@ input {
       float: left;
       span {
         padding: 10px;
+      }
+      strong {
+        margin-left: 40px;
       }
     }
     .meaning {

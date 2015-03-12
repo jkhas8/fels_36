@@ -7,6 +7,14 @@
          pluralize(@lesson.check_correct_answer, "correct answer"),
          class: "correct" %>
       <%= content_tag :ul, class: "words" do %>
+        <%= content_tag :li do %>
+          <%= content_tag :div, class: "content" do %>
+            <%= content_tag :strong, "Question" %>
+          <% end %>
+          <%= content_tag :div, class: "meaning" do %>
+            <%= content_tag :strong, "Your answer" %>
+          <% end %>
+        <% end %>
         <% @lesson.results.each do |result| %>
           <%= content_tag :li do %>
             <%= content_tag :div, class: "content" do %>
