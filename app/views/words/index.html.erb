@@ -19,15 +19,21 @@
   <% end %>
 <% end %>
 <%= content_tag :div, class: "row" do %>
-  <%= content_tag :div, class: "col-md-12" do %>
-    <% if @words.blank? %>
-      <%= content_tag :p, "There are no words with this filter!" %>
-    <% else %>
-      <%= will_paginate %>
-      <%= content_tag :ul, class: "words col-md-6 col-md-offset-3" do %>
-        <%= render @words %>
+  <% if @words.blank? %>
+    <%= content_tag :p, "There are no words with this filter!" %>
+  <% else %>
+    <%= will_paginate %>
+    <% 2.times do |i| %>
+      <%= content_tag :div, class: "col-md-6" do %>
+        <%= content_tag :ul, class: "words col-md-6 col-md-offset-3" do %>
+          <%= content_tag :li do %>
+            <%= content_tag :strong, "Japanese", class: "content" %>
+            <%= content_tag :strong, "Vietnamese", class: "meaning" %>
+          <% end %>
+          <%= render i == 1 ? @words[0,@words.size/2] : @words[@words.size/2, @words.size] %>
+        <% end %>
       <% end %>
-      <%= will_paginate %>
     <% end %>
+    <%= will_paginate %>
   <% end %>
 <% end %>
