@@ -20,14 +20,19 @@ class LessonsController < ApplicationController
       current_lesson = Lesson.find params[:lesson_id]
       words = current_lesson.results.map(&:word)
     end
-    words.shuffle.each do |word|
-      @lesson.results.build word: word
-    end
-    if @lesson.save
-      redirect_to category_lesson_path @category, @lesson
+    if words.size > 0
+      words.shuffle.each do |word|
+        @lesson.results.build word: word
+      end
+      if @lesson.save
+        redirect_to category_lesson_path @category, @lesson
+      else
+        flash[:warning] = "Can not create lessons, try again later!"
+        redirect_to root_path
+      end
     else
-      flash[:warning] = "Can not create lessons, try again later!"
-      redirect_to root_path
+      flash[:warning] = "Sorry, this lesson doesn't have words."
+      redirect_to categories_path
     end
   end
 
